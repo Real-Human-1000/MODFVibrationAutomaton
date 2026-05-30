@@ -19,7 +19,7 @@ I tried so hard to find a nice algebraic solution for this problem, but that tur
 
 The basic theory of mass-spring systems can be found in any Vibrations or Dynamic Systems course, but the system can be represented as a matrix equation:
 
-M * xdd + K * x = 0
+M * d^2x/dt^2 + K * x = 0
 
 Where the matrices M and K depend on the system. If M is diagonal, the system is said to be without dynamic coupling, and if K is diagonal, it is said to be without static coupling.
 For this project, M is diagonal and K is not diagonal, but is symmetric and has a very regular structure on the off-diagonals.
@@ -33,11 +33,11 @@ This matrix P is neat because it can decouple the system response, allowing us t
 
 x = P * y
 
-P^T * M * P * ydd + P^T * K * P * y = 0
+P^T * M * P * d^2y/dt^2 + P^T * K * P * y = 0
 
-Md * y + Kd * y = 0
+Md * d^2y/dt^2 + Kd * y = 0
 
-md_i * ydd_i + kd_i * y_i = 0
+md_i * d^2y_i/dt^2 + kd_i * y_i = 0
 
 At this point, you can use P to decouple the desired trajectory into individual solutions and reconstruct the response to calculate the proper initial conditions.
 This is trivial to do, which is good because it's been like months since I actually did it for the Amogus trajectory so I don't remember how.
