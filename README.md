@@ -18,18 +18,27 @@ My original MATLAB code basically just used random optimization and it was liter
 I tried so hard to find a nice algebraic solution for this problem, but that turns it into this nasty nonlinear symbolic system that's even worse.
 
 The basic theory of mass-spring systems can be found in any Vibrations or Dynamic Systems course, but the system can be represented as a matrix equation:
+
 M * xdd + K * x = 0
+
 Where the matrices M and K depend on the system. If M is diagonal, the system is said to be without dynamic coupling, and if K is diagonal, it is said to be without static coupling.
 For this project, M is diagonal and K is not diagonal, but is symmetric and has a very regular structure on the off-diagonals.
 The natural frequencies are the values w which satisfy the equation:
+
 det|-w^2 * M + K| = 0
+
 They can also be found as the eigenvalues of M^-1 * K.
 This is useful because the eigenvectors of M^-1 * K are the modes of vibration. If they are represented as unit column vectors, they can be horizontally stacked to create a matrix P.
 This matrix P is neat because it can decouple the system response, allowing us to transform the system into a collection of individual equations that are much easier to deal with:
+
 x = P * y
+
 P^T * M * P * ydd + P^T * K * P * y = 0
+
 Md * y + Kd * y = 0
+
 md_i * ydd_i + kd_i * y_i = 0
+
 At this point, you can use P to decouple the desired trajectory into individual solutions and reconstruct the response to calculate the proper initial conditions.
 This is trivial to do, which is good because it's been like months since I actually did it for the Amogus trajectory so I don't remember how.
 
